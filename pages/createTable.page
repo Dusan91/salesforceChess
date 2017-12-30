@@ -1,0 +1,16 @@
+<apex:page id="createTable" standardController="Chess__c" extensions="chessClass" sidebar="false">
+    <apex:form >
+        <apex:pageBlock title="Create New Table">
+            <p >Name</p>
+           <apex:inputField value="{!newTable.Name}"/>
+            <p >Fen</p>
+            <apex:inputField value="{!newTable.Fen__c}"/>
+            <p >Side to Move</p>
+            <apex:inputField value="{!newTable.Side_To_Move__c}"/>
+            <br/>
+            <apex:commandButton action="{!createTable}" value="Create" styleClass="btn" style="font-size: 15px;text-decoration:none;"/>
+            <apex:commandButton action="https://dusanproba-dev-ed--c.eu11.visual.force.com/apex/chessPage" value="Cancel" styleClass="btn" style="font-size: 15px;text-decoration:none;"/>
+
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

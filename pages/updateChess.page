@@ -1,0 +1,20 @@
+<!--
+ - Created by dusan on 12/25/2017.
+ -->
+
+<apex:page id="updateChess" standardController="Chess__c" extensions="chessClassOne" sidebar="false">
+    <apex:form >
+        <apex:pageBlock title="Update Chess">
+
+            <p >Name - {!getC.Name}</p>
+            <apex:inputField value="{!updChess.Name}"/>
+            <p >Fen - {!getC.Fen__c}</p>
+            <apex:inputField value="{!updChess.Fen__c}"/>
+            <p >Side to Move - {!getC.Side_To_Move__c}</p>
+            <apex:inputField value="{!updChess.Side_To_Move__c}"/>
+            <br/>
+            <apex:commandButton action="{!updChessTable}" value="Update"/>
+            <apex:commandButton action="https://dusanproba-dev-ed--c.eu11.visual.force.com/apex/readChess?chId={!getC.Id}&flipT=false" value="Cancel"/>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,41 @@
+<apex:page id="chessPage" controller="chessClass" sidebar="false">
+    <style>
+        .headerStyle {
+            text-align: center !important;
+        }
+
+
+    </style>
+    <apex:form id="theForm">
+        <apex:pageBlock id="pageBlock">
+            <apex:commandLink value="Create New" action="{!createT}" styleClass="btn" style="font-size: 15px;text-decoration:none;"/><br/>
+            <apex:pageBlockTable value="{!chessWraps}" var="ch" headerClass="headerStyle" style="text-align:center !important;">
+             <apex:column value="{!ch.chess.Name}" style="border: 1px solid #E0E3E5;"/>
+
+                <apex:column headerValue="Table" style="border: 1px solid #E0E3E5;">
+                    <apex:repeat value="{!ch.listOfFields}" var="l" >
+                        <apex:repeat value="{!l}" var="c">
+
+                         <!-- <apex:image id="img2" value="{!$Resource.images+'/piece-images/wrb.gif'}"/>-->
+                            <apex:image id="img" value="/resource/1513392495000/images/piece-images/{!c}"/>
+
+                        </apex:repeat>
+                        <br/>
+                    </apex:repeat>
+                    <br/>
+                    <apex:commandLink value="Open Table" action="{!read}" styleClass="btn" style="font-size: 15px;text-decoration:none;">
+                        <apex:param name="tid" value="{!ch.chess.Id}"/>
+                    </apex:commandLink>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <apex:commandLink value="Delete Table" action="{!deleteTable}" styleClass="btn" style="font-size: 15px;text-decoration:none;">
+                        <apex:param name="tid" value="{!ch.chess.Id}"/>
+                    </apex:commandLink>
+
+                </apex:column>
+                <apex:column headerValue="Next Play" style="border: 1px solid #E0E3E5;" >
+
+                    <apex:outputText value="{!IF(ch.chess.Side_To_Move__c == 'b','White','Black')}"/>
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

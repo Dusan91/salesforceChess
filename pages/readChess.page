@@ -1,0 +1,74 @@
+<apex:page id="readChess" controller="chessClassOne" sidebar="false" >
+    <style>
+        .headerStyle {
+            text-align: center !important;
+        }
+        .pbHeader{
+            font-size: 30px;
+        }
+
+
+    </style>
+        <apex:form id="theFormO" >
+            <apex:pageBlock title="Table">
+                <apex:commandButton action="https://dusanproba-dev-ed--c.eu11.visual.force.com/apex/chessPage" value="Back" styleClass="btn" style="font-size: 15px;text-decoration:none;"/>
+
+                <apex:pageBlockTable value="{!chessWrapOnes}" var="chO" headerClass="headerStyle" style="text-align:center !important;">
+
+                    <apex:column value="{!chO.chess.Name}"/>
+
+                    <apex:column headerValue="Table">
+                        <apex:repeat value="{!chO.listOfFields}" var="l">
+                            <apex:repeat value="{!l}" var="c">
+
+                                <!-- <apex:image id="img2" value="{!$Resource.images+'/piece-images/wrb.gif'}"/>-->
+                                <apex:image id="img" value="/resource/1513392495000/images/piece-images/{!c}"/>
+
+                            </apex:repeat>
+                            <br/>
+                        </apex:repeat>
+                        <br/>
+                        <apex:commandLink value="Update" action="{!updChessTableGet}" styleClass="btn" style="font-size: 20px;text-decoration:none;">
+                            <apex:param name="tid" value="{!chO.chess.Id}"/>
+
+                        </apex:commandLink>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                       <!-- <apex:commandButton action="{!flip}" value="Flip Table" id="theButton"/>-->
+
+                            <apex:commandLink value="Flip Table" action="{!flip}" styleClass="btn" style="font-size: 20px;text-decoration:none;">
+                                <apex:param name="flip" value="{!IF(flip,'false','true')}"/>
+                                <apex:param name="tid" value="{!chO.chess.Id}"/>
+
+                            </apex:commandLink>
+
+                        </apex:column>
+
+
+                        <!-- <apex:commandLink value="See Table Like Black Player" action="{!flip}">
+                            <apex:param name="flip" value="true"/>
+                            <apex:param name="tid" value="{!chO.chess.Id}"/>
+
+                        </apex:commandLink><br/><br/><br/>
+
+                        <apex:commandLink value="See Table Like White Player" action="{!flip}">
+                            <apex:param name="flip" value="false"/>
+                            <apex:param name="tid" value="{!chO.chess.Id}"/>
+
+                        </apex:commandLink>
+                    </apex:column> -->
+
+                    <!--
+                    <apex:column ><apex:outputText value="{!IF(flip,'Black','White')}"/></apex:column>
+                    -->
+
+                    <apex:column headerValue="Next Play">
+                        <p>Next Play</p>
+                        <strong>
+                        <apex:outputText value="{!IF(chO.chess.Side_To_Move__c == 'b','White','Black')}"/>
+                        </strong>
+                    </apex:column>
+                </apex:pageBlockTable>
+            </apex:pageBlock>
+        </apex:form>
+</apex:page>
